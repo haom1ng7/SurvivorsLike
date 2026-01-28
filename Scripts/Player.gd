@@ -1,0 +1,69 @@
+# res://scripts/Player.gd
+extends CharacterBody2D
+
+signal hp_changed(cur, max)
+signal exp_changed(exp, exp_to_next, level)
+signal died
+
+@export var max_hp := 100.0
+@export var move_speed := 260.0
+@export var attack := 10.0
+@export var attack_speed := 4.0 # 每秒发射次数
+
+@export var regen_delay := 3.0
+@export var regen_per_sec := 6.0
+
+var hp := 100.0
+var last_damage_time := 0.0
+
+var level := 1
+var exp := 0
+var exp_to_next := 20
+
+@onready var world := get_tree().current_scene.get_node("World") as Node2D
+
+func _ready():
+	hp = max_hp
+	global_position = Vector2.ZERO
+	emit_signal("hp_changed", hp, max_hp)
+	emit_signal("exp_changed", exp, exp_to_next, level)
+
+func _process(delta):
+	look_at(get_global_mouse_position())
+	_handle_regen(delta)
+
+func _physics_process(delta):
+	var dir := Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	).normalized()
+
+	(world as Node).add_offset(dir * move_speed * delta)
+	global_position = Vector2.ZERO # 永远居中
+
+func _handle_regen(delta):
+	if hp <= 0: return
+	var t := Time.get_ticks_msec() / 1000.0
+	if t - last_damage_time >= regen_delay and hp < max_hp:
+		hp = min(max_hp, hp + regen_per_sec * delta)
+		emit_signal("hp_changed", hp, max_hp)
+
+func take_damage(amount: float):
+	if hp <= 0: return
+	hp -= amount
+	last_damage_time = Time.get_ticks_msec() / 1000.0
+	emit_signal("hp_changed", hp, max_hp)
+	if hp <= 0:
+		emit_signal("died")
+
+func add_exp(amount: int):
+	exp += amount
+	while exp >= exp_to_next:
+		exp -= exp_to_next
+		_level_up()
+	emit_signal("exp_changed", exp, exp_to_next, level)
+
+func _level_up():
+	level += 1
+	exp_to_next = int(exp_to_next * 1.35 + 5)
+	Events.emit_level_up(level)

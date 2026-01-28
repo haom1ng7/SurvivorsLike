@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba53jva3fxsro"]
+
+[ext_resource type="Script" uid="uid://6hgqyd1t7aay" path="res://Scripts/EnemyRanged.gd" id="1_gtq2t"]
+[ext_resource type="PackedScene" uid="uid://dvges1gvgy4yv" path="res://Scenes/Bullet.tscn" id="3_wh20j"]
+
+[node name="EnemyRanged" type="CharacterBody2D"]
+script = ExtResource("1_gtq2t")
+bullet_scene = ExtResource("3_wh20j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="HitCooldown" type="Timer" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]

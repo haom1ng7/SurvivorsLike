@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://b5vyer66ngigv"]
+
+[ext_resource type="Script" uid="uid://vghhfsrb1q0i" path="res://Scripts/Main.gd" id="1_50glp"]
+[ext_resource type="Script" uid="uid://c7k8wcck50bsb" path="res://Scripts/World.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://cvrgjg1624l4f" path="res://Scenes/Shared.tscn" id="2_4kpch"]
+[ext_resource type="PackedScene" uid="uid://cf04utx8stlmc" path="res://Scenes/Player.tscn" id="2_kln2b"]
+[ext_resource type="Script" uid="uid://djxmb200xe8l3" path="res://Scripts/Spawner.gd" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://cycan7gbtlsw2" path="res://Scripts/HUD.gd" id="4_jw32o"]
+[ext_resource type="Script" uid="uid://cjniiq5mvui34" path="res://Scripts/GameState.gd" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://bnt5dhyttmy0q" path="res://Scripts/LevelUpPanel.gd" id="4_v1gob"]
+[ext_resource type="PackedScene" uid="uid://dtitxxui7g2xn" path="res://Scenes/EnemyMelee.tscn" id="5_bmxlf"]
+[ext_resource type="Script" uid="uid://sl8jul82to8n" path="res://Scripts/Relics.gd" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://ba53jva3fxsro" path="res://Scenes/EnemyRanged.tscn" id="6_4kpch"]
+[ext_resource type="Texture2D" uid="uid://cvudpor4lp5yt" path="res://Assets/BackGround.jpeg" id="8_grg3l"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_50glp")
+shard_scene = ExtResource("2_4kpch")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("1_r150o")
+
+[node name="Spawner" type="Node" parent="World"]
+script = ExtResource("3_rgh2o")
+melee_scene = ExtResource("5_bmxlf")
+ranged_scene = ExtResource("6_4kpch")
+
+[node name="BackGround" type="Sprite2D" parent="World"]
+texture = ExtResource("8_grg3l")
+
+[node name="Entities" type="Node2D" parent="World"]
+
+[node name="Player" parent="World/Entities" instance=ExtResource("2_kln2b")]
+
+[node name="Enemies" type="Node2D" parent="World/Entities"]
+
+[node name="Projectiles" type="Node2D" parent="World/Entities"]
+
+[node name="Drops" type="Node2D" parent="World/Entities"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_jw32o")
+
+[node name="HPLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EXPLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TimeLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LevelUpPanel" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_v1gob")
+
+[node name="OptionA" type="Button" parent="UI/LevelUpPanel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "选项A"
+
+[node name="OptionB" type="Button" parent="UI/LevelUpPanel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "选项B"
+
+[node name="Title" type="Label" parent="UI/LevelUpPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "升级！"
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="GameState" type="Node" parent="Systems"]
+script = ExtResource("4_rgh2o")
+
+[node name="Relics" type="Node" parent="Systems"]
+script = ExtResource("5_pbw6q")
