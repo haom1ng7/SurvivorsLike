@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5vyer66ngigv"]
+[gd_scene load_steps=14 format=3 uid="uid://b5vyer66ngigv"]
 
 [ext_resource type="Script" uid="uid://vghhfsrb1q0i" path="res://Scripts/Main.gd" id="1_50glp"]
 [ext_resource type="Script" uid="uid://c7k8wcck50bsb" path="res://Scripts/World.gd" id="1_r150o"]
@@ -11,7 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dtitxxui7g2xn" path="res://Scenes/EnemyMelee.tscn" id="5_bmxlf"]
 [ext_resource type="Script" uid="uid://sl8jul82to8n" path="res://Scripts/Relics.gd" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://ba53jva3fxsro" path="res://Scenes/EnemyRanged.tscn" id="6_4kpch"]
-[ext_resource type="Texture2D" uid="uid://cvudpor4lp5yt" path="res://Assets/BackGround.jpeg" id="8_grg3l"]
+[ext_resource type="Texture2D" uid="uid://1e00dk8kfpv1" path="res://Assets/99700ae5-a2f3-45d2-840c-be6b29a5a9ea.png" id="7_frkhe"]
+[ext_resource type="Script" uid="uid://dq6kv3bv1ijnx" path="res://Scripts/BackGround.gd" id="8_frkhe"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_50glp")
@@ -24,19 +25,23 @@ script = ExtResource("1_r150o")
 script = ExtResource("3_rgh2o")
 melee_scene = ExtResource("5_bmxlf")
 ranged_scene = ExtResource("6_4kpch")
+spawn_per_sec = 1.0
 
 [node name="BackGround" type="Sprite2D" parent="World"]
-texture = ExtResource("8_grg3l")
+texture = ExtResource("7_frkhe")
+centered = false
+region_rect = Rect2(10000, 10000, 10000, 10000)
+script = ExtResource("8_frkhe")
 
 [node name="Entities" type="Node2D" parent="World"]
+
+[node name="Drops" type="Node2D" parent="World/Entities"]
 
 [node name="Player" parent="World/Entities" instance=ExtResource("2_kln2b")]
 
 [node name="Enemies" type="Node2D" parent="World/Entities"]
 
 [node name="Projectiles" type="Node2D" parent="World/Entities"]
-
-[node name="Drops" type="Node2D" parent="World/Entities"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -71,21 +76,29 @@ script = ExtResource("4_v1gob")
 
 [node name="OptionA" type="Button" parent="UI/LevelUpPanel"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 415.0
+offset_top = 405.0
+offset_right = 466.0
+offset_bottom = 436.0
 text = "选项A"
 
 [node name="OptionB" type="Button" parent="UI/LevelUpPanel"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 669.0
+offset_top = 401.0
+offset_right = 720.0
+offset_bottom = 432.0
 text = "选项B"
 
 [node name="Title" type="Label" parent="UI/LevelUpPanel"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 499.0
+offset_top = 256.0
+offset_right = 649.0
+offset_bottom = 356.0
 text = "升级！"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Systems" type="Node" parent="."]
 

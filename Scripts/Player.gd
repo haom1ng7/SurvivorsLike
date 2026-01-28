@@ -8,7 +8,7 @@ signal died
 @export var max_hp := 100.0
 @export var move_speed := 260.0
 @export var attack := 10.0
-@export var attack_speed := 4.0 # 每秒发射次数
+@export var attack_speed := 4.0
 
 @export var regen_delay := 3.0
 @export var regen_per_sec := 6.0
@@ -39,7 +39,7 @@ func _physics_process(delta):
 	).normalized()
 
 	(world as Node).add_offset(dir * move_speed * delta)
-	global_position = Vector2.ZERO # 永远居中
+	global_position = Vector2.ZERO # 居中
 
 func _handle_regen(delta):
 	if hp <= 0: return

@@ -10,7 +10,7 @@ var options := []
 
 func _ready():
 	hide()
-	# 暂停时 UI 还要能点
+	# 暂停时 UI 能点
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	btn_a.pressed.connect(func(): _pick(0))

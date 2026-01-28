@@ -2,8 +2,11 @@
 class_name World
 extends Node2D
 
-@export var world_size := Vector2(4000, 4000)
+@export var world_size := Vector2(1024, 1024)
 var world_offset := Vector2.ZERO
+
+func _ready() -> void:
+	world_offset = world_size * 0.5 # 确保在地图中心
 
 func add_offset(delta: Vector2) -> void:
 	world_offset += delta

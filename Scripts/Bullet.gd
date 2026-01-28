@@ -14,6 +14,9 @@ func setup_world(spawn_world: Vector2, dir: Vector2, speed: float, dmg: float):
 	velocity = dir * speed
 	damage = dmg
 	rotation = dir.angle()
+	
+	if world != null:
+		global_position = world.world_to_screen(world_pos)
 
 func _ready():
 	$LifeTimer.one_shot = true

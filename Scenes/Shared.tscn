@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvrgjg1624l4f"]
+[gd_scene load_steps=4 format=3 uid="uid://cvrgjg1624l4f"]
 
 [ext_resource type="Script" uid="uid://creto1hoclije" path="res://Scripts/Shared.gd" id="1_5vaf6"]
+[ext_resource type="Texture2D" uid="uid://trowcd2txht7" path="res://Assets/KenneyAnimatedCoinsV3.png" id="2_72ksi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_72ksi"]
 
@@ -9,3 +10,6 @@ script = ExtResource("1_5vaf6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_72ksi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_72ksi")

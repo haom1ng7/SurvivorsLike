@@ -21,7 +21,7 @@ func _ready():
 	# 敌人生成时绑定死亡事件
 	enemies.child_entered_tree.connect(_on_enemy_spawned)
 
-	# 升级事件 -> 弹二选一
+	# 升级
 	Events.level_up.connect(_on_level_up)
 	level_up_panel.picked.connect(_on_relic_picked)
 
@@ -30,7 +30,7 @@ func _on_enemy_spawned(n: Node):
 		n.died.connect(_on_enemy_died)
 
 func _on_enemy_died(enemy_world_pos: Vector2):
-	# 掉一个碎片（最小版本）
+	# 掉一个碎片
 	var s := shard_scene.instantiate()
 	drops.add_child(s)
 	s.setup_world(enemy_world_pos + Vector2(randf_range(-12, 12), randf_range(-12, 12)))
