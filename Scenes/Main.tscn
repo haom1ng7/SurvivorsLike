@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5vyer66ngigv"]
+[gd_scene load_steps=15 format=3 uid="uid://b5vyer66ngigv"]
 
 [ext_resource type="Script" uid="uid://vghhfsrb1q0i" path="res://Scripts/Main.gd" id="1_50glp"]
 [ext_resource type="Script" uid="uid://c7k8wcck50bsb" path="res://Scripts/World.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cvrgjg1624l4f" path="res://Scenes/Shared.tscn" id="2_4kpch"]
 [ext_resource type="PackedScene" uid="uid://cf04utx8stlmc" path="res://Scenes/Player.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://ww2qx7phb7pv" path="res://Scenes/DeathMenu.tscn" id="3_1p5hy"]
 [ext_resource type="Script" uid="uid://djxmb200xe8l3" path="res://Scripts/Spawner.gd" id="3_rgh2o"]
 [ext_resource type="Script" uid="uid://cycan7gbtlsw2" path="res://Scripts/HUD.gd" id="4_jw32o"]
 [ext_resource type="Script" uid="uid://cjniiq5mvui34" path="res://Scripts/GameState.gd" id="4_rgh2o"]
@@ -17,6 +18,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_50glp")
 shard_scene = ExtResource("2_4kpch")
+death_scene = ExtResource("3_1p5hy")
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("1_r150o")

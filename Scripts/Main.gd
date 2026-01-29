@@ -2,6 +2,7 @@
 extends Node2D
 
 @export var shard_scene: PackedScene
+@export var death_scene: PackedScene
 
 @onready var enemies := $World/Entities/Enemies
 @onready var drops := $World/Entities/Drops
@@ -24,6 +25,9 @@ func _ready():
 	# 升级
 	Events.level_up.connect(_on_level_up)
 	level_up_panel.picked.connect(_on_relic_picked)
+	
+	# 连接玩家死亡信号
+	player.died.connect(_on_player_died) 
 
 func _on_enemy_spawned(n: Node):
 	if n.has_signal("died"):
@@ -41,3 +45,6 @@ func _on_level_up(level: int):
 
 func _on_relic_picked(id: String):
 	relics.apply_relic(id, player)
+
+func _on_player_died():
+	get_tree().change_scene_to_packed(death_scene)
