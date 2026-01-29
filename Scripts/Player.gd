@@ -9,6 +9,7 @@ signal died
 @export var move_speed := 260.0
 @export var attack := 10.0
 @export var attack_speed := 4.0
+@export var pickup_range := 150.0
 
 @export var regen_delay := 3.0
 @export var regen_per_sec := 6.0
