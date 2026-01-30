@@ -51,6 +51,8 @@ func _on_relic_picked(id: String):
 	relics.apply_relic(id, player)
 
 func _on_player_died():
+	# 等待死亡动画播放完毕
+	await get_tree().create_timer(1.5).timeout
 	get_tree().change_scene_to_packed(death_scene)
 
 func _on_game_over(win: bool):

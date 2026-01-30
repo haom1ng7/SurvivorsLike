@@ -8,7 +8,7 @@ signal died
 @export var max_hp := 100.0
 @export var move_speed := 260.0
 @export var attack := 10.0
-@export var attack_speed := 4.0
+@export var attack_speed := 4.0	
 @export var pickup_range := 150.0
 @export var projectile_count := 1
 @export var spread_arc := 15.0
@@ -30,6 +30,9 @@ func _ready():
 	global_position = Vector2.ZERO
 	emit_signal("hp_changed", hp, max_hp)
 	emit_signal("exp_changed", current_exp, exp_to_next, level)
+	
+	# 播放待机动画
+	$AnimatedSprite2D.play("idle")
 
 func _process(delta):
 	look_at(get_global_mouse_position())
@@ -63,6 +66,9 @@ func take_damage(amount: float):
 	last_damage_time = time_now
 	emit_signal("hp_changed", hp, max_hp)
 	if hp <= 0:
+		$AnimatedSprite2D.play("die")
+		set_physics_process(false) # 禁用移动
+		set_process(false)         # 禁用瞄准/其他每帧逻辑
 		emit_signal("died")
 
 func add_exp(amount: int):
