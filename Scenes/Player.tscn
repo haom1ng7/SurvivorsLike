@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cf04utx8stlmc"]
+[gd_scene format=3 uid="uid://cf04utx8stlmc"]
 
 [ext_resource type="Script" uid="uid://byaff5rda2nnx" path="res://Scripts/Player.gd" id="1_kyqiw"]
 [ext_resource type="Script" uid="uid://f7su6e08sobf" path="res://Scripts/Weapon.gd" id="2_gntrk"]
@@ -127,27 +127,27 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1395143559]
 collision_mask = 26
 script = ExtResource("1_kyqiw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2093688698]
 shape = SubResource("CircleShape2D_dewec")
 
-[node name="Weapon" type="Node2D" parent="."]
+[node name="Weapon" type="Node2D" parent="." unique_id=177991240]
 script = ExtResource("2_gntrk")
 bullet_scene = ExtResource("3_gntrk")
 
-[node name="Muzzle" type="Node2D" parent="Weapon"]
+[node name="Muzzle" type="Node2D" parent="Weapon" unique_id=643973814]
 
-[node name="ShootCooldown" type="Timer" parent="Weapon"]
+[node name="ShootCooldown" type="Timer" parent="Weapon" unique_id=707125479]
 one_shot = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=657258421]
 sprite_frames = SubResource("SpriteFrames_gntrk")
 animation = &"idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=304472334]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=408038227]
 texture = ExtResource("6_nn08x")
