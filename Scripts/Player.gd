@@ -35,7 +35,7 @@ func _ready():
 	$AnimatedSprite2D.play("idle")
 
 func _process(delta):
-	look_at(get_global_mouse_position())
+	# look_at(get_global_mouse_position()) # 移除角色跟随鼠标旋转
 	_handle_regen(delta)
 
 func _physics_process(delta):

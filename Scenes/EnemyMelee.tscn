@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtitxxui7g2xn"]
+[gd_scene load_steps=16 format=3 uid="uid://dtitxxui7g2xn"]
 
 [ext_resource type="Script" uid="uid://xm18gw37unju" path="res://Scripts/EnemyMelee.gd" id="1_d66gu"]
 [ext_resource type="Texture2D" uid="uid://lnci18hj5o4y" path="res://Assets/Animation/enemy1_die(64x64).png" id="2_e5pyh"]
 [ext_resource type="Texture2D" uid="uid://c41n3yienhixs" path="res://Assets/Animation/enemy1_idle(64x64).png" id="3_5vcx8"]
+[ext_resource type="Texture2D" uid="uid://ucokmhig81o" path="res://Assets/Textures/shade_enemy1.png" id="4_5vcx8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kuiht"]
 
@@ -96,3 +97,6 @@ shape = SubResource("CircleShape2D_e5pyh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ew64u")
 animation = &"idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_5vcx8")

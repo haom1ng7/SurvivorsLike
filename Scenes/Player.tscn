@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://cf04utx8stlmc"]
+[gd_scene load_steps=24 format=3 uid="uid://cf04utx8stlmc"]
 
 [ext_resource type="Script" uid="uid://byaff5rda2nnx" path="res://Scripts/Player.gd" id="1_kyqiw"]
 [ext_resource type="Script" uid="uid://f7su6e08sobf" path="res://Scripts/Weapon.gd" id="2_gntrk"]
 [ext_resource type="PackedScene" uid="uid://dvges1gvgy4yv" path="res://Scenes/BulletPlayer.tscn" id="3_gntrk"]
 [ext_resource type="Texture2D" uid="uid://c423rh5hvkjri" path="res://Assets/Animation/bubble_died(64x64).png" id="4_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://2mtb5kxe3kfx" path="res://Assets/Animation/bubble_idle(64x64).png" id="5_nn08x"]
+[ext_resource type="Texture2D" uid="uid://cyprxinxin7ny" path="res://Assets/Textures/shade_bubble.png" id="6_nn08x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dewec"]
 
@@ -147,3 +148,6 @@ sprite_frames = SubResource("SpriteFrames_gntrk")
 animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_nn08x")
