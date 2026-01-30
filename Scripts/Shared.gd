@@ -11,6 +11,8 @@ var magnet_speed := 400.0
 
 func setup_world(pos: Vector2):
 	world_pos = world.wrap_offset(pos)
+	# 立即更新一次位置，防止首帧闪烁
+	global_position = world.world_to_screen(world_pos)
 
 func _ready():
 	body_entered.connect(_on_body_entered)

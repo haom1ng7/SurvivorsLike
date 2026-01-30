@@ -49,4 +49,3 @@ func _on_area_entered(area):
 	if area.get_script() == get_script():
 		if is_enemy != area.is_enemy:
 			queue_free()
-
