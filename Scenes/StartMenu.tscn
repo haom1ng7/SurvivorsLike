@@ -37,7 +37,7 @@ theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "<Undefined Title>
+text = "做，做个吸血鬼like……
 "
 label_settings = SubResource("LabelSettings_wxvro")
 horizontal_alignment = 1
