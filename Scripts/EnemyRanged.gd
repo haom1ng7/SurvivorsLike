@@ -42,4 +42,5 @@ func _shoot():
 
 	var b := bullet_scene.instantiate()
 	get_tree().current_scene.get_node("World/Entities/Projectiles").add_child(b)
-	b.setup_world(world_pos, dir, bullet_speed, bullet_damage)
+	# 穿透=1, is_enemy=true
+	b.setup_world(world_pos, dir, bullet_speed, bullet_damage, 1, true)

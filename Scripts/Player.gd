@@ -10,6 +10,8 @@ signal died
 @export var attack := 10.0
 @export var attack_speed := 4.0
 @export var pickup_range := 150.0
+@export var projectile_count := 1
+@export var spread_arc := 15.0
 
 @export var regen_delay := 3.0
 @export var regen_per_sec := 6.0
@@ -18,7 +20,7 @@ var hp := 100.0
 var last_damage_time := 0.0
 
 var level := 1
-var exp := 0
+var current_exp := 0
 var exp_to_next := 20
 
 @onready var world := get_tree().current_scene.get_node("World") as Node2D
@@ -27,7 +29,7 @@ func _ready():
 	hp = max_hp
 	global_position = Vector2.ZERO
 	emit_signal("hp_changed", hp, max_hp)
-	emit_signal("exp_changed", exp, exp_to_next, level)
+	emit_signal("exp_changed", current_exp, exp_to_next, level)
 
 func _process(delta):
 	look_at(get_global_mouse_position())
@@ -51,18 +53,24 @@ func _handle_regen(delta):
 
 func take_damage(amount: float):
 	if hp <= 0: return
+
+	# 无敌帧判定 (1.0秒)
+	var time_now := Time.get_ticks_msec() / 1000.0
+	if time_now - last_damage_time < 1.0:
+		return
+
 	hp -= amount
-	last_damage_time = Time.get_ticks_msec() / 1000.0
+	last_damage_time = time_now
 	emit_signal("hp_changed", hp, max_hp)
 	if hp <= 0:
 		emit_signal("died")
 
 func add_exp(amount: int):
-	exp += amount
-	while exp >= exp_to_next:
-		exp -= exp_to_next
+	current_exp += amount
+	while current_exp >= exp_to_next:
+		current_exp -= exp_to_next
 		_level_up()
-	emit_signal("exp_changed", exp, exp_to_next, level)
+	emit_signal("exp_changed", current_exp, exp_to_next, level)
 
 func _level_up():
 	level += 1

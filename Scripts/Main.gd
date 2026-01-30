@@ -17,6 +17,7 @@ func _ready():
 	hud.bind(player, game_state)
 
 	# 计时开始
+	game_state.game_over.connect(_on_game_over)
 	game_state.start_game()
 
 	# 敌人生成时绑定死亡事件
@@ -34,10 +35,13 @@ func _on_enemy_spawned(n: Node):
 		n.died.connect(_on_enemy_died)
 
 func _on_enemy_died(enemy_world_pos: Vector2):
-	# 掉一个碎片
+	# 延迟生成掉落物，避免物理回调冲突
+	call_deferred("_spawn_shard", enemy_world_pos)
+
+func _spawn_shard(pos: Vector2):
 	var s := shard_scene.instantiate()
 	drops.add_child(s)
-	s.setup_world(enemy_world_pos + Vector2(randf_range(-12, 12), randf_range(-12, 12)))
+	s.setup_world(pos + Vector2(randf_range(-12, 12), randf_range(-12, 12)))
 
 func _on_level_up(level: int):
 	var cands :Array = relics.roll_two()
@@ -48,3 +52,8 @@ func _on_relic_picked(id: String):
 
 func _on_player_died():
 	get_tree().change_scene_to_packed(death_scene)
+
+func _on_game_over(win: bool):
+	if win:
+		# 胜利跳转，暂时复用结算场景
+		get_tree().change_scene_to_packed(death_scene)

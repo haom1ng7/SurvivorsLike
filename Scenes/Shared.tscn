@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_72ksi"]
 
 [node name="Shared" type="Area2D"]
+collision_layer = 16
 script = ExtResource("1_5vaf6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

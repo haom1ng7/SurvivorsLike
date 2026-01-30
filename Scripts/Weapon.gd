@@ -21,10 +21,22 @@ func _try_shoot():
 	cd.start(1.0 / atk_spd)
 
 	var spawn_world: Vector2 = world.screen_to_world(muzzle.global_position)
-	var dir := (get_global_mouse_position() - muzzle.global_position).normalized()
+	var base_dir := (get_global_mouse_position() - muzzle.global_position).normalized()
+	var base_angle := base_dir.angle()
 
-	var b := bullet_scene.instantiate()
-	projectiles_root.add_child(b)
+	var count: int = player.projectile_count
+	var arc: float = deg_to_rad(player.spread_arc)
 	
-	# muzzle.global_position 是“屏幕相对坐标”，转成世界坐标
-	b.setup_world(spawn_world, dir, bullet_speed, player.attack)
+	for i in range(count):
+		var angle_offset := 0.0
+		if count > 1:
+			var step := arc / (count - 1) if count > 1 else 0.0
+			# 让散射居中: -half_arc 到 +half_arc
+			angle_offset = -arc * 0.5 + i * step
+		
+		var current_angle := base_angle + angle_offset
+		var dir := Vector2.from_angle(current_angle)
+
+		var b := bullet_scene.instantiate()
+		projectiles_root.add_child(b)
+		b.setup_world(spawn_world, dir, bullet_speed, player.attack)
